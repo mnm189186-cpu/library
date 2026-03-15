@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رفع كتاب PDF - جنون العظمة</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-color: #8B6F47;
+      --secondary-color: #2C5F7E;
+      --accent-gold: #D4AF37;
+      --parchment-bg: #F5E6D3;
+      --text-primary: #2C2416;
+      --border-ornament: #C9A26A;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #F5E6D3 0%, #EAD8C0 50%, #F5E6D3 100%);
+      direction: rtl;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .page-header {
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 3rem 2rem;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    
+    .page-header h1 {
+      font-family: 'Amiri', serif;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .page-header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+    
+    .upload-section {
+      background: white;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 2px solid var(--border-ornament);
+      margin-bottom: 2rem;
+    }
+    
+    .section-title {
+      font-family: 'Amiri', serif;
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid var(--accent-gold);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .upload-area {
+      border: 3px dashed var(--accent-gold);
+      padding: 4rem 2rem;
+      border-radius: 12px;
+      background: var(--parchment-bg);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 2rem;
+    }
+    
+    .upload-area:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-color: var(--secondary-color);
+      transform: scale(1.02);
+    }
+    
+    .upload-area.dragover {
+      background: rgba(44, 95, 126, 0.1);
+      border-color: var(--secondary-color);
+      border-style: solid;
+    }
+    
+    .upload-icon {
+      font-size: 5rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .upload-text {
+      font-size: 1.2rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .upload-hint {
+      font-size: 0.95rem;
+      color: #888;
+    }
+    
+    .file-input {
+      display: none;
+    }
+    
+    .file-info {
+      background: var(--parchment-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      display: none;
+    }
+    
+    .file-info.visible {
+      display: block;
+    }
+    
+    .file-name {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .file-size {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .process-options {
+      background: white;
+      padding: 2rem;
+      border: 2px solid var(--border-ornament);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+    
+    .option-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .option-label {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .option-input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid var(--border-ornament);
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+    }
+    
+    .option-select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid var(--border-ornament);
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      background: white;
+    }
+    
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    
+    .checkbox-group input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .process-btn {
+      width: 100%;
+      padding: 1.2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    .process-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    
+    .process-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .progress-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px solid var(--border-ornament);
+      margin-bottom: 2rem;
+      display: none;
+    }
+    
+    .progress-section.visible {
+      display: block;
+    }
+    
+    .progress-bar-container {
+      width: 100%;
+      height: 30px;
+      background: var(--parchment-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-gold), var(--secondary-color));
+      width: 0%;
+      transition: width 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+    
+    .progress-steps {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .progress-step {
+      padding: 0.8rem;
+      margin-bottom: 0.5rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s;
+    }
+    
+    .progress-step.pending {
+      background: #f5f5f5;
+      color: #999;
+    }
+    
+    .progress-step.active {
+      background: rgba(44, 95, 126, 0.1);
+      color: var(--secondary-color);
+      font-weight: 600;
+    }
+    
+    .progress-step.completed {
+      background: rgba(76, 175, 80, 0.1);
+      color: #4caf50;
+    }
+    
+    .progress-step.error {
+      background: rgba(244, 67, 54, 0.1);
+      color: #f44336;
+    }
+    
+    .result-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px solid var(--border-ornament);
+      display: none;
+    }
+    
+    .result-section.visible {
+      display: block;
+    }
+    
+    .result-success {
+      background: rgba(76, 175, 80, 0.1);
+      border: 2px solid #4caf50;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .result-success h3 {
+      color: #4caf50;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .result-error {
+      background: rgba(244, 67, 54, 0.1);
+      border: 2px solid #f44336;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+    
+    .result-error h3 {
+      color: #f44336;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .result-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .result-btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .result-btn-primary {
+      background: var(--secondary-color);
+      color: white;
+    }
+    
+    .result-btn-primary:hover {
+      background: var(--primary-color);
+    }
+    
+    .result-btn-secondary {
+      background: var(--parchment-bg);
+      color: var(--primary-color);
+      border: 2px solid var(--border-ornament);
+    }
+    
+    .result-btn-secondary:hover {
+      background: var(--accent-gold);
+      color: white;
+    }
+    
+    .info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-right: 4px solid #2196f3;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    
+    .info-box h3 {
+      color: #2196f3;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    
+    .info-box ul {
+      list-style: none;
+      padding-right: 0;
+    }
+    
+    .info-box li {
+      padding: 0.3rem 0 0.3rem 1.5rem;
+      position: relative;
+    }
+    
+    .info-box li::before {
+      content: '✓';
+      position: absolute;
+      right: 0;
+      color: #2196f3;
+      font-weight: bold;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1><i class="fas fa-file-upload"></i> رفع ومعالجة كتاب PDF</h1>
+      <p>قم برفع كتاب PDF وسيقوم النظام بتحليله واستخراج محتواه تلقائياً</p>
+    </div>
+    
+    <!-- Info Box -->
+    <div class="info-box">
+      <h3><i class="fas fa-info-circle"></i> كيف يعمل النظام؟</h3>
+      <ul>
+        <li>رفع ملف PDF إلى Google Drive</li>
+        <li>استخراج النص باستخدام تقنية OCR</li>
+        <li>تحليل البنية واكتشاف العناوين والفصول</li>
+        <li>توليد HTML منسق بتصميم عربي احترافي</li>
+        <li>إنشاء مسودة تلقائياً على Blogger</li>
+        <li>إضافة فهرس تفاعلي وزخارف إسلامية</li>
+      </ul>
+    </div>
+    
+    <!-- Upload Section -->
+    <div class="upload-section">
+      <h2 class="section-title">
+        <i class="fas fa-cloud-upload-alt"></i> رفع الكتاب
+      </h2>
+      
+      <div class="upload-area" id="uploadArea">
+        <i class="fas fa-file-pdf upload-icon"></i>
+        <p class="upload-text">اسحب وأفلت ملف PDF هنا</p>
+        <p class="upload-hint">أو انقر للاختيار من جهازك</p>
+        <input type="file" id="fileInput" class="file-input" accept=".pdf" />
+      </div>
+      
+      <div class="file-info" id="fileInfo">
+        <p class="file-name">
+          <i class="fas fa-file-pdf"></i>
+          <span id="fileName"></span>
+        </p>
+        <p class="file-size" id="fileSize"></p>
+      </div>
+    </div>
+    
+    <!-- Process Options -->
+    <div class="process-options" id="processOptions" style="display: none;">
+      <h2 class="section-title">
+        <i class="fas fa-cog"></i> خيارات المعالجة
+      </h2>
+      
+      <div class="option-group">
+        <label class="option-label">عنوان الكتاب (اختياري)</label>
+        <input type="text" id="bookTitle" class="option-input" placeholder="سيتم استخراجه تلقائياً إذا تُرك فارغاً" />
+      </div>
+      
+      <div class="option-group">
+        <label class="option-label">اسم المؤلف (اختياري)</label>
+        <input type="text" id="bookAuthor" class="option-input" placeholder="اسم المؤلف" />
+      </div>
+      
+      <div class="option-group">
+        <label class="option-label">التصنيف</label>
+        <select id="bookCategory" class="option-select">
+          <option value="عام">عام</option>
+          <option value="قرآن">قرآن وتفسير</option>
+          <option value="حديث">حديث وسيرة</option>
+          <option value="فقه">فقه وأصول</option>
+          <option value="عقيدة">عقيدة وتوحيد</option>
+          <option value="تاريخ">تاريخ وحضارة</option>
+          <option value="أدب">أدب ولغة</option>
+          <option value="علوم">علوم ومعارف</option>
+        </select>
+      </div>
+      
+      <div class="option-group">
+        <div class="checkbox-group">
+          <input type="checkbox" id="addTOC" checked />
+          <label for="addTOC">إضافة جدول محتويات تلقائي</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="addOrnaments" checked />
+          <label for="addOrnaments">إضافة زخارف إسلامية</label>
+        </div>
+        <div class="checkbox-group">
+          <input type="checkbox" id="publishDraft" checked />
+          <label for="publishDraft">نشر كمسودة على Blogger</label>
+        </div>
+      </div>
+      
+      <button class="process-btn" id="processBtn">
+        <i class="fas fa-magic"></i> معالجة وتحليل الكتاب
+      </button>
+    </div>
+    
+    <!-- Progress Section -->
+    <div class="progress-section" id="progressSection">
+      <h2 class="section-title">
+        <i class="fas fa-tasks"></i> التقدم
+      </h2>
+      
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar">0%</div>
+      </div>
+      
+      <ul class="progress-steps">
+        <li class="progress-step pending" id="step1">
+          <i class="fas fa-circle-notch"></i>
+          <span>رفع الملف إلى Google Drive...</span>
+        </li>
+        <li class="progress-step pending" id="step2">
+          <i class="fas fa-circle-notch"></i>
+          <span>استخراج النص باستخدام OCR...</span>
+        </li>
+        <li class="progress-step pending" id="step3">
+          <i class="fas fa-circle-notch"></i>
+          <span>تحليل البنية والمحتوى...</span>
+        </li>
+        <li class="progress-step pending" id="step4">
+          <i class="fas fa-circle-notch"></i>
+          <span>توليد HTML منسق...</span>
+        </li>
+        <li class="progress-step pending" id="step5">
+          <i class="fas fa-circle-notch"></i>
+          <span>نشر المسودة على Blogger...</span>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Result Section -->
+    <div class="result-section" id="resultSection"></div>
+  </div>
+
+  <script>
+    // ============================================
+    // المتغيرات العامة
+    // ============================================
+    
+    // استبدل هذا برابط Google Apps Script Web App الخاص بك
+    const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+    
+    let selectedFile = null;
+    
+    // ============================================
+    // معالجات الأحداث
+    // ============================================
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const uploadArea = document.getElementById('uploadArea');
+      const fileInput = document.getElementById('fileInput');
+      const processBtn = document.getElementById('processBtn');
+      
+      // Click to upload
+      uploadArea.addEventListener('click', () => fileInput.click());
+      
+      // File selection
+      fileInput.addEventListener('change', handleFileSelect);
+      
+      // Drag and drop
+      uploadArea.addEventListener('dragover', handleDragOver);
+      uploadArea.addEventListener('dragleave', handleDragLeave);
+      uploadArea.addEventListener('drop', handleDrop);
+      
+      // Process button
+      processBtn.addEventListener('click', processFile);
+    });
+    
+    // ============================================
+    // Upload Handlers
+    // ============================================
+    
+    function handleFileSelect(e) {
+      const file = e.target.files[0];
+      if (file && file.type === 'application/pdf') {
+        selectedFile = file;
+        displayFileInfo(file);
+      } else {
+        alert('الرجاء اختيار ملف PDF صالح');
+      }
+    }
+    
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.classList.add('dragover');
+    }
+    
+    function handleDragLeave(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.classList.remove('dragover');
+    }
+    
+    function handleDrop(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.currentTarget.classList.remove('dragover');
+      
+      const file = e.dataTransfer.files[0];
+      if (file && file.type === 'application/pdf') {
+        selectedFile = file;
+        document.getElementById('fileInput').files = e.dataTransfer.files;
+        displayFileInfo(file);
+      } else {
+        alert('الرجاء إفلات ملف PDF صالح');
+      }
+    }
+    
+    function displayFileInfo(file) {
+      const fileInfo = document.getElementById('fileInfo');
+      const fileName = document.getElementById('fileName');
+      const fileSize = document.getElementById('fileSize');
+      const processOptions = document.getElementById('processOptions');
+      
+      fileName.textContent = file.name;
+      fileSize.textContent = `الحجم: ${formatFileSize(file.size)}`;
+      
+      fileInfo.classList.add('visible');
+      processOptions.style.display = 'block';
+      
+      // Scroll to options
+      processOptions.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' بايت';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' كيلوبايت';
+      return (bytes / (1024 * 1024)).toFixed(2) + ' ميجابايت';
+    }
+    
+    // ============================================
+    // Process File
+    // ============================================
+    
+    async function processFile() {
+      if (!selectedFile) {
+        alert('الرجاء اختيار ملف أولاً');
+        return;
+      }
+      
+      // التحقق من رابط Apps Script
+      if (APPS_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+        alert('⚠️ تنبيه: يجب تكوين رابط Google Apps Script أولاً!\n\nالرجاء اتباع التعليمات في ملف README.md');
+        return;
+      }
+      
+      // Get options
+      const options = {
+        title: document.getElementById('bookTitle').value,
+        author: document.getElementById('bookAuthor').value,
+        category: document.getElementById('bookCategory').value,
+        addTOC: document.getElementById('addTOC').checked,
+        addOrnaments: document.getElementById('addOrnaments').checked,
+        publishDraft: document.getElementById('publishDraft').checked
+      };
+      
+      // Show progress section
+      const progressSection = document.getElementById('progressSection');
+      progressSection.classList.add('visible');
+      progressSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Disable process button
+      const processBtn = document.getElementById('processBtn');
+      processBtn.disabled = true;
+      processBtn.innerHTML = '<div class="spinner"></div> جاري المعالجة...';
+      
+      try {
+        // Simulate processing steps
+        await simulateProcessing();
+        
+        // In production, replace with actual API call:
+        // const result = await uploadToAppsScript(selectedFile, options);
+        
+        // Show success
+        showResult(true, {
+          message: 'تمت معالجة الكتاب بنجاح!',
+          blogPostUrl: '#',
+          driveFileUrl: '#'
+        });
+        
+      } catch (error) {
+        console.error('Error:', error);
+        showResult(false, { message: error.message });
+      } finally {
+        processBtn.disabled = false;
+        processBtn.innerHTML = '<i class="fas fa-magic"></i> معالجة وتحليل الكتاب';
+      }
+    }
+    
+    // Simulate processing for demonstration
+    async function simulateProcessing() {
+      const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+      const progressBar = document.getElementById('progressBar');
+      
+      for (let i = 0; i < steps.length; i++) {
+        const stepId = steps[i];
+        const step = document.getElementById(stepId);
+        
+        // Mark as active
+        step.classList.remove('pending');
+        step.classList.add('active');
+        step.querySelector('i').className = 'fas fa-spinner fa-spin';
+        
+        // Update progress bar
+        const progress = ((i + 1) / steps.length) * 100;
+        progressBar.style.width = progress + '%';
+        progressBar.textContent = Math.round(progress) + '%';
+        
+        // Wait
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Mark as completed
+        step.classList.remove('active');
+        step.classList.add('completed');
+        step.querySelector('i').className = 'fas fa-check-circle';
+      }
+    }
+    
+    // Actual upload function (to be implemented)
+    async function uploadToAppsScript(file, options) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('options', JSON.stringify(options));
+      
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (!response.ok) {
+        throw new Error('فشل رفع الملف');
+      }
+      
+      return await response.json();
+    }
+    
+    // ============================================
+    // Show Result
+    // ============================================
+    
+    function showResult(success, data) {
+      const resultSection = document.getElementById('resultSection');
+      resultSection.classList.add('visible');
+      
+      if (success) {
+        resultSection.innerHTML = `
+          <div class="result-success">
+            <h3><i class="fas fa-check-circle"></i> تم بنجاح!</h3>
+            <p>${data.message}</p>
+            <div class="result-actions">
+              <a href="${data.blogPostUrl}" target="_blank" class="result-btn result-btn-primary">
+                <i class="fas fa-external-link-alt"></i> عرض المسودة على Blogger
+              </a>
+              <a href="${data.driveFileUrl}" target="_blank" class="result-btn result-btn-secondary">
+                <i class="fas fa-file-pdf"></i> فتح الملف على Drive
+              </a>
+              <button class="result-btn result-btn-secondary" onclick="location.reload()">
+                <i class="fas fa-redo"></i> رفع كتاب آخر
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        resultSection.innerHTML = `
+          <div class="result-error">
+            <h3><i class="fas fa-exclamation-circle"></i> حدث خطأ</h3>
+            <p>${data.message}</p>
+            <div class="result-actions">
+              <button class="result-btn result-btn-primary" onclick="location.reload()">
+                <i class="fas fa-redo"></i> إعادة المحاولة
+              </button>
+            </div>
+          </div>
+        `;
+      }
+      
+      resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+</html>

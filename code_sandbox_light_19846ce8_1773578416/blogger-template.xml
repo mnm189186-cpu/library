@@ -1,0 +1,1918 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2' dir='rtl' lang='ar' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title><data:blog.pageTitle/></title>
+  <b:include data='blog' name='all-head-content'/>
+  
+  <!-- Google Fonts - Arabic Typography -->
+  <link href='https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&amp;family=Cairo:wght@300;400;600;700;900&amp;family=Tajawal:wght@300;400;500;700&amp;display=swap' rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'"/>
+  
+  <!-- Font Awesome -->
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet'/>
+  
+  <style type='text/css'>
+/*<![CDATA[*/
+
+/* ============================================
+   جنون العظمة - قالب بلوجر احترافي
+   تصميم عربي RTL بطابع تراثي إسلامي
+============================================ */
+
+/* === المتغيرات والألوان === */
+:root {
+  /* ألوان رئيسية */
+  --primary-color: #8B6F47;        /* بني ذهبي */
+  --secondary-color: #2C5F7E;      /* أزرق تراثي */
+  --accent-gold: #D4AF37;          /* ذهبي */
+  --parchment-bg: #F5E6D3;         /* خلفية ورق رق */
+  --parchment-dark: #E8D4BE;       /* ورق رق داكن */
+  --text-primary: #2C2416;         /* نص رئيسي */
+  --text-secondary: #5A4A3A;       /* نص ثانوي */
+  --border-ornament: #C9A26A;      /* حدود زخرفية */
+  
+  /* الخطوط */
+  --font-primary: 'Cairo', 'Segoe UI Arabic', sans-serif;
+  --font-display: 'Amiri', 'Times New Roman', serif;
+  --font-body: 'Tajawal', 'Segoe UI', sans-serif;
+  
+  /* الظلال والتأثيرات */
+  --shadow-sm: 0 2px 4px rgba(139,111,71,0.1);
+  --shadow-md: 0 4px 12px rgba(139,111,71,0.15);
+  --shadow-lg: 0 8px 24px rgba(139,111,71,0.2);
+  --shadow-ornate: 0 4px 16px rgba(212,175,55,0.3);
+  
+  /* الأبعاد */
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}
+
+/* === إعادة تعيين وأساسيات === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, #F5E6D3 0%, #EAD8C0 50%, #F5E6D3 100%);
+  background-attachment: fixed;
+  direction: rtl;
+  overflow-x: hidden;
+}
+
+/* خلفية نسيج الورق */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(0deg, rgba(139,111,71,0.03) 0px, transparent 1px, transparent 2px, rgba(139,111,71,0.03) 3px),
+    repeating-linear-gradient(90deg, rgba(139,111,71,0.03) 0px, transparent 1px, transparent 2px, rgba(139,111,71,0.03) 3px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: all var(--transition-speed) ease;
+}
+
+a:hover {
+  color: var(--accent-gold);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* === زخارف هندسية إسلامية === */
+.islamic-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 50%, transparent 9%, var(--border-ornament) 9%, var(--border-ornament) 10%, transparent 10%),
+    radial-gradient(circle at 80% 50%, transparent 9%, var(--border-ornament) 9%, var(--border-ornament) 10%, transparent 10%);
+  background-size: 40px 40px;
+  opacity: 0.1;
+}
+
+.ornate-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  position: relative;
+}
+
+.ornate-divider::before,
+.ornate-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--border-ornament), transparent);
+}
+
+.ornate-divider i {
+  margin: 0 1rem;
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* === الحاوية الرئيسية === */
+.site-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-lg);
+  min-height: 100vh;
+}
+
+/* === الترويسة === */
+.site-header {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 1rem 0;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid var(--accent-gold);
+}
+
+.header-top {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-icon {
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--primary-color);
+  box-shadow: var(--shadow-ornate);
+  animation: rotate-slow 20s linear infinite;
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.site-title h1 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: 2px;
+}
+
+.site-description {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  font-family: var(--font-primary);
+  font-style: italic;
+}
+
+.header-tools {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-toggle, .ai-chat-toggle {
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-size: 0.95rem;
+}
+
+.search-toggle:hover, .ai-chat-toggle:hover {
+  background: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* === القائمة الرئيسية مع Mega Menu === */
+.main-nav {
+  background: rgba(44, 36, 22, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(212,175,55,0.3);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all var(--transition-speed);
+  border-bottom: 3px solid transparent;
+}
+
+.nav-link:hover,
+.nav-item:hover > .nav-link {
+  background: rgba(212,175,55,0.2);
+  border-bottom-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* Mega Menu Dropdown */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  padding: 2rem;
+  min-width: 800px;
+  max-width: 1000px;
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all var(--transition-speed);
+  border: 2px solid var(--border-ornament);
+  z-index: 999;
+}
+
+.nav-item:hover .mega-menu {
+  display: grid;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInDown 0.4s ease;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mega-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.mega-menu-column h3 {
+  font-family: var(--font-display);
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mega-menu-links {
+  list-style: none;
+}
+
+.mega-menu-links li {
+  margin-bottom: 0.7rem;
+}
+
+.mega-menu-links a {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+}
+
+.mega-menu-links a:hover {
+  background: var(--parchment-bg);
+  color: var(--secondary-color);
+  padding-right: 1rem;
+}
+
+.mega-menu-links i {
+  font-size: 0.8rem;
+  color: var(--accent-gold);
+}
+
+/* === المحتوى الرئيسي === */
+.main-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+}
+
+.content-area {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-ornament);
+}
+
+/* === البطاقات === */
+.post-card {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 2rem;
+  border: 1px solid var(--parchment-dark);
+  transition: all var(--transition-speed);
+  position: relative;
+}
+
+.post-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle at top right, var(--accent-gold) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+  pointer-events: none;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.post-card:hover::before {
+  opacity: 0.1;
+}
+
+.post-thumbnail {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform var(--transition-speed);
+}
+
+.post-card:hover .post-thumbnail {
+  transform: scale(1.05);
+}
+
+.post-content {
+  padding: 1.5rem;
+}
+
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.post-meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.post-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  line-height: 1.4;
+}
+
+.post-title a {
+  color: inherit;
+}
+
+.post-title a:hover {
+  color: var(--secondary-color);
+}
+
+.post-excerpt {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary-color);
+  font-weight: 600;
+  padding: 0.6rem 1.5rem;
+  border: 2px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-speed);
+}
+
+.read-more:hover {
+  background: var(--secondary-color);
+  color: white;
+  transform: translateX(-5px);
+}
+
+/* === الشريط الجانبي === */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar-widget {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-ornament);
+  border-top: 4px solid var(--accent-gold);
+}
+
+.widget-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 2px solid var(--parchment-dark);
+}
+
+.widget-title i {
+  color: var(--accent-gold);
+}
+
+/* مكتبة الكتب */
+.books-widget .book-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--parchment-dark);
+  transition: background var(--transition-speed);
+}
+
+.books-widget .book-item:hover {
+  background: var(--parchment-bg);
+  cursor: pointer;
+}
+
+.book-cover {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.book-info h4 {
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin-bottom: 0.3rem;
+}
+
+.book-info p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* === القدم === */
+.site-footer {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: white;
+  padding: 3rem 0 1rem;
+  margin-top: 3rem;
+  border-top: 3px solid var(--accent-gold);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-widget h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(212,175,55,0.5);
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+  color: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+  padding-right: 0.5rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.9rem;
+}
+
+/* === بحث متقدم === */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(44, 36, 22, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+}
+
+.search-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.search-container {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  max-width: 600px;
+  width: 90%;
+  box-shadow: var(--shadow-ornate);
+  border: 2px solid var(--accent-gold);
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  border: 2px solid var(--border-ornament);
+  border-radius: var(--border-radius);
+  font-family: var(--font-primary);
+  transition: border-color var(--transition-speed);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+}
+
+.search-close {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: white;
+  color: var(--primary-color);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-speed);
+}
+
+.search-close:hover {
+  background: var(--accent-gold);
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* === دردشة الذكاء الاصطناعي === */
+.ai-chat-widget {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 400px;
+  max-height: 600px;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--accent-gold);
+  display: none;
+  flex-direction: column;
+  z-index: 9998;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.ai-chat-widget.active {
+  display: flex;
+}
+
+.chat-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 1rem;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+}
+
+.chat-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.chat-close:hover {
+  transform: rotate(90deg);
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  max-height: 400px;
+  background: var(--parchment-bg);
+}
+
+.chat-message {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.chat-message.user {
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: var(--secondary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.message-content {
+  background: white;
+  padding: 0.8rem 1rem;
+  border-radius: var(--border-radius);
+  max-width: 70%;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.chat-message.user .message-content {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.chat-input-area {
+  padding: 1rem;
+  border-top: 1px solid var(--border-ornament);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 0.8rem;
+  border: 2px solid var(--border-ornament);
+  border-radius: var(--border-radius);
+  font-family: var(--font-primary);
+}
+
+.chat-send {
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.chat-send:hover {
+  background: var(--primary-color);
+  transform: scale(1.05);
+}
+
+/* === صفحة مكتبة الكتب === */
+.books-library {
+  padding: 2rem 0;
+}
+
+.books-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.books-header h1 {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.books-search-bar {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  position: relative;
+}
+
+.books-search-input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1rem;
+  font-size: 1.1rem;
+  border: 2px solid var(--border-ornament);
+  border-radius: var(--border-radius);
+  font-family: var(--font-primary);
+}
+
+.books-search-btn {
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--accent-gold);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: calc(var(--border-radius) - 2px);
+  cursor: pointer;
+  color: white;
+  transition: all 0.2s;
+}
+
+.books-search-btn:hover {
+  background: var(--secondary-color);
+}
+
+.books-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.2rem;
+  border: 2px solid var(--border-ornament);
+  background: white;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-primary);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--secondary-color);
+  color: white;
+  border-color: var(--secondary-color);
+}
+
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.book-card {
+  background: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-ornament);
+  transition: all var(--transition-speed);
+  cursor: pointer;
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.book-card-cover {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  background: var(--parchment-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  color: var(--accent-gold);
+}
+
+.book-card-content {
+  padding: 1.5rem;
+}
+
+.book-card-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.book-card-author {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.book-card-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.book-card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.book-btn {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.book-btn-primary {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.book-btn-primary:hover {
+  background: var(--primary-color);
+}
+
+.book-btn-secondary {
+  background: var(--parchment-dark);
+  color: var(--primary-color);
+}
+
+.book-btn-secondary:hover {
+  background: var(--accent-gold);
+  color: white;
+}
+
+/* === قارئ PDF === */
+.pdf-reader-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  z-index: 10000;
+  display: none;
+  flex-direction: column;
+}
+
+.pdf-reader-modal.active {
+  display: flex;
+}
+
+.pdf-reader-header {
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pdf-reader-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+}
+
+.pdf-reader-close {
+  background: white;
+  color: var(--primary-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+}
+
+.pdf-reader-close:hover {
+  background: var(--accent-gold);
+  color: white;
+}
+
+.pdf-reader-content {
+  flex: 1;
+  overflow: hidden;
+}
+
+.pdf-reader-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* === رفع PDF === */
+.pdf-upload-section {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  border: 2px dashed var(--border-ornament);
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.pdf-upload-section h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.upload-area {
+  border: 3px dashed var(--accent-gold);
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  background: var(--parchment-bg);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  margin: 2rem 0;
+}
+
+.upload-area:hover {
+  background: var(--parchment-dark);
+  border-color: var(--secondary-color);
+}
+
+.upload-area i {
+  font-size: 4rem;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.upload-area p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.upload-file-input {
+  display: none;
+}
+
+.process-pdf-btn {
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+.process-pdf-btn:hover {
+  background: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.process-pdf-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* === Loading Spinner === */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* === Responsive Design === */
+@media (max-width: 1024px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .mega-menu {
+    min-width: 600px;
+  }
+  
+  .mega-menu-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .ai-chat-widget {
+    width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-title h1 {
+    font-size: 1.8rem;
+  }
+  
+  .header-top {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+  }
+  
+  .mega-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    min-width: auto;
+    max-width: 100%;
+    overflow-y: auto;
+    border-radius: 0;
+  }
+  
+  .mega-menu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  .ai-chat-widget {
+    width: 90%;
+    left: 5%;
+    bottom: 1rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-title h1 {
+    font-size: 1.5rem;
+  }
+  
+  .books-header h1 {
+    font-size: 2rem;
+  }
+  
+  .post-title {
+    font-size: 1.4rem;
+  }
+  
+  .books-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Animations === */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* === Utilities === */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.hidden { display: none; }
+.visible { display: block; }
+
+/*]]>*/
+  </style>
+</head>
+
+<body>
+  <div class='site-wrapper'>
+    <!-- الترويسة -->
+    <header class='site-header'>
+      <div class='header-top'>
+        <div class='site-logo'>
+          <div class='logo-icon'>
+            <i class='fas fa-star-and-crescent'></i>
+          </div>
+          <div class='site-title'>
+            <h1><data:blog.title/></h1>
+            <p class='site-description'>رحلة في عمق التاريخ والثقافة الإسلامية</p>
+          </div>
+        </div>
+        
+        <div class='header-tools'>
+          <button class='search-toggle' onclick='toggleSearch()'>
+            <i class='fas fa-search'></i> بحث
+          </button>
+          <button class='ai-chat-toggle' onclick='toggleAIChat()'>
+            <i class='fas fa-robot'></i> دردشة ذكية
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- القائمة الرئيسية مع Mega Menu -->
+    <nav class='main-nav'>
+      <div class='nav-container'>
+        <ul class='nav-menu'>
+          <li class='nav-item'>
+            <a class='nav-link' href='/'>
+              <i class='fas fa-home'></i> الرئيسية
+            </a>
+          </li>
+          
+          <!-- مكتبة الكتب -->
+          <li class='nav-item'>
+            <a class='nav-link' href='/p/library.html'>
+              <i class='fas fa-book'></i> مكتبة الكتب
+            </a>
+            <div class='mega-menu'>
+              <div class='mega-menu-grid'>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-quran'></i> العلوم الشرعية</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/تفسير'><i class='fas fa-angle-left'></i> تفسير القرآن</a></li>
+                    <li><a href='/search/label/حديث'><i class='fas fa-angle-left'></i> الحديث النبوي</a></li>
+                    <li><a href='/search/label/فقه'><i class='fas fa-angle-left'></i> الفقه الإسلامي</a></li>
+                    <li><a href='/search/label/عقيدة'><i class='fas fa-angle-left'></i> العقيدة والتوحيد</a></li>
+                    <li><a href='/search/label/سيرة'><i class='fas fa-angle-left'></i> السيرة النبوية</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-landmark'></i> التاريخ والحضارة</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/تاريخ-إسلامي'><i class='fas fa-angle-left'></i> التاريخ الإسلامي</a></li>
+                    <li><a href='/search/label/حضارة'><i class='fas fa-angle-left'></i> الحضارة الإسلامية</a></li>
+                    <li><a href='/search/label/أعلام'><i class='fas fa-angle-left'></i> أعلام ومشاهير</a></li>
+                    <li><a href='/search/label/تراث'><i class='fas fa-angle-left'></i> التراث والثقافة</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-graduation-cap'></i> علوم أخرى</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/أدب'><i class='fas fa-angle-left'></i> الأدب العربي</a></li>
+                    <li><a href='/search/label/لغة'><i class='fas fa-angle-left'></i> اللغة العربية</a></li>
+                    <li><a href='/search/label/فلسفة'><i class='fas fa-angle-left'></i> الفلسفة الإسلامية</a></li>
+                    <li><a href='/search/label/علوم'><i class='fas fa-angle-left'></i> العلوم والمعارف</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <!-- قصص الأنبياء -->
+          <li class='nav-item'>
+            <a class='nav-link' href='/p/prophets-stories.html'>
+              <i class='fas fa-praying-hands'></i> قصص الأنبياء
+            </a>
+            <div class='mega-menu'>
+              <div class='mega-menu-grid'>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-star'></i> أولو العزم</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/p/noah.html'><i class='fas fa-angle-left'></i> نوح عليه السلام</a></li>
+                    <li><a href='/p/ibrahim.html'><i class='fas fa-angle-left'></i> إبراهيم عليه السلام</a></li>
+                    <li><a href='/p/musa.html'><i class='fas fa-angle-left'></i> موسى عليه السلام</a></li>
+                    <li><a href='/p/isa.html'><i class='fas fa-angle-left'></i> عيسى عليه السلام</a></li>
+                    <li><a href='/p/muhammad.html'><i class='fas fa-angle-left'></i> محمد ﷺ</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-users'></i> أنبياء آخرون</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/p/adam.html'><i class='fas fa-angle-left'></i> آدم عليه السلام</a></li>
+                    <li><a href='/p/yusuf.html'><i class='fas fa-angle-left'></i> يوسف عليه السلام</a></li>
+                    <li><a href='/p/sulaiman.html'><i class='fas fa-angle-left'></i> سليمان عليه السلام</a></li>
+                    <li><a href='/p/yunus.html'><i class='fas fa-angle-left'></i> يونس عليه السلام</a></li>
+                    <li><a href='/p/ayyub.html'><i class='fas fa-angle-left'></i> أيوب عليه السلام</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-book-open'></i> دروس وعبر</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/صبر'><i class='fas fa-angle-left'></i> الصبر والثبات</a></li>
+                    <li><a href='/search/label/توكل'><i class='fas fa-angle-left'></i> التوكل على الله</a></li>
+                    <li><a href='/search/label/إيمان'><i class='fas fa-angle-left'></i> قوة الإيمان</a></li>
+                    <li><a href='/search/label/دعوة'><i class='fas fa-angle-left'></i> الدعوة إلى الله</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <!-- الثقة بالله -->
+          <li class='nav-item'>
+            <a class='nav-link' href='/p/trust-in-allah.html'>
+              <i class='fas fa-heart'></i> الثقة بالله
+            </a>
+            <div class='mega-menu'>
+              <div class='mega-menu-grid'>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-seedling'></i> تزكية النفس</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/توبة'><i class='fas fa-angle-left'></i> التوبة والإنابة</a></li>
+                    <li><a href='/search/label/ذكر'><i class='fas fa-angle-left'></i> الذكر والدعاء</a></li>
+                    <li><a href='/search/label/صلاة'><i class='fas fa-angle-left'></i> الصلاة وأثرها</a></li>
+                    <li><a href='/search/label/قرآن'><i class='fas fa-angle-left'></i> تدبر القرآن</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-hand-holding-heart'></i> الأخلاق والسلوك</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/صدق'><i class='fas fa-angle-left'></i> الصدق والأمانة</a></li>
+                    <li><a href='/search/label/تواضع'><i class='fas fa-angle-left'></i> التواضع والرحمة</a></li>
+                    <li><a href='/search/label/عفو'><i class='fas fa-angle-left'></i> العفو والتسامح</a></li>
+                    <li><a href='/search/label/شكر'><i class='fas fa-angle-left'></i> الشكر والرضا</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-lightbulb'></i> طريق النجاة</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/هداية'><i class='fas fa-angle-left'></i> طلب الهداية</a></li>
+                    <li><a href='/search/label/استغفار'><i class='fas fa-angle-left'></i> الاستغفار</a></li>
+                    <li><a href='/search/label/يقين'><i class='fas fa-angle-left'></i> اليقين بالله</a></li>
+                    <li><a href='/search/label/جنة'><i class='fas fa-angle-left'></i> الطريق للجنة</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <!-- ثقافات وقصص -->
+          <li class='nav-item'>
+            <a class='nav-link' href='/p/cultures.html'>
+              <i class='fas fa-globe'></i> ثقافات وقصص
+            </a>
+            <div class='mega-menu'>
+              <div class='mega-menu-grid'>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-map-marked-alt'></i> الحضارات</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/عباسية'><i class='fas fa-angle-left'></i> الخلافة العباسية</a></li>
+                    <li><a href='/search/label/أموية'><i class='fas fa-angle-left'></i> الخلافة الأموية</a></li>
+                    <li><a href='/search/label/عثمانية'><i class='fas fa-angle-left'></i> الدولة العثمانية</a></li>
+                    <li><a href='/search/label/أندلس'><i class='fas fa-angle-left'></i> الأندلس</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-book-reader'></i> قصص تاريخية</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/search/label/فتوحات'><i class='fas fa-angle-left'></i> الفتوحات الإسلامية</a></li>
+                    <li><a href='/search/label/معارك'><i class='fas fa-angle-left'></i> المعارك التاريخية</a></li>
+                    <li><a href='/search/label/قادة'><i class='fas fa-angle-left'></i> القادة العظام</a></li>
+                    <li><a href='/search/label/علماء'><i class='fas fa-angle-left'></i> العلماء الأفذاذ</a></li>
+                  </ul>
+                </div>
+                <div class='mega-menu-column'>
+                  <h3><i class='fas fa-scroll'></i> مصادر موثوقة</h3>
+                  <ul class='mega-menu-links'>
+                    <li><a href='/p/sources.html'><i class='fas fa-angle-left'></i> المصادر التاريخية</a></li>
+                    <li><a href='/p/bibliography.html'><i class='fas fa-angle-left'></i> المراجع</a></li>
+                    <li><a href='/p/research.html'><i class='fas fa-angle-left'></i> البحوث والدراسات</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <!-- رفع كتاب -->
+          <li class='nav-item'>
+            <a class='nav-link' href='/p/upload-pdf.html'>
+              <i class='fas fa-upload'></i> رفع كتاب
+            </a>
+          </li>
+          
+          <!-- من نحن -->
+          <li class='nav-item'>
+            <a class='nav-link' href='/p/about.html'>
+              <i class='fas fa-info-circle'></i> من نحن
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <main class='main-content fade-in'>
+      <div class='content-area'>
+        <b:section class='main-posts' id='main' maxwidgets='1' showaddelement='yes'>
+          <b:widget id='Blog1' locked='false' title='المقالات' type='Blog' version='2'>
+            <b:includable id='main'>
+              <b:if cond='data:blog.pageType == &quot;index&quot;'>
+                <!-- عرض المقالات على الصفحة الرئيسية -->
+                <div class='blog-posts'>
+                  <b:loop values='data:posts' var='post'>
+                    <article class='post-card slide-in-right'>
+                      <b:if cond='data:post.featuredImage'>
+                        <img class='post-thumbnail' expr:alt='data:post.title' expr:src='data:post.featuredImage'/>
+                      </b:if>
+                      
+                      <div class='post-content'>
+                        <div class='post-meta'>
+                          <span><i class='far fa-calendar'></i> <data:post.date/></span>
+                          <span><i class='far fa-user'></i> <data:post.author/></span>
+                          <b:if cond='data:post.labels'>
+                            <span>
+                              <i class='fas fa-tags'></i>
+                              <b:loop values='data:post.labels' var='label'>
+                                <a expr:href='data:label.url' rel='tag'><data:label.name/></a>
+                              </b:loop>
+                            </span>
+                          </b:if>
+                        </div>
+                        
+                        <h2 class='post-title'>
+                          <a expr:href='data:post.url'><data:post.title/></a>
+                        </h2>
+                        
+                        <p class='post-excerpt'>
+                          <data:post.snippet/>
+                        </p>
+                        
+                        <a class='read-more' expr:href='data:post.url'>
+                          اقرأ المزيد <i class='fas fa-arrow-left'></i>
+                        </a>
+                      </div>
+                    </article>
+                  </b:loop>
+                </div>
+              <b:else/>
+                <!-- عرض المقال الكامل -->
+                <b:loop values='data:posts' var='post'>
+                  <article class='full-post'>
+                    <header class='post-header'>
+                      <h1 class='post-title'><data:post.title/></h1>
+                      
+                      <div class='post-meta'>
+                        <span><i class='far fa-calendar'></i> <data:post.date/></span>
+                        <span><i class='far fa-user'></i> <data:post.author/></span>
+                        <span><i class='far fa-eye'></i> <data:post.numComments/> تعليق</span>
+                      </div>
+                      
+                      <div class='ornate-divider'>
+                        <i class='fas fa-star'></i>
+                      </div>
+                    </header>
+                    
+                    <div class='post-body'>
+                      <data:post.body/>
+                    </div>
+                    
+                    <footer class='post-footer'>
+                      <b:if cond='data:post.labels'>
+                        <div class='post-labels'>
+                          <i class='fas fa-tags'></i>
+                          <b:loop values='data:post.labels' var='label'>
+                            <a class='label-tag' expr:href='data:label.url' rel='tag'>
+                              <data:label.name/>
+                            </a>
+                          </b:loop>
+                        </div>
+                      </b:if>
+                      
+                      <div class='ornate-divider'>
+                        <i class='fas fa-moon'></i>
+                      </div>
+                    </footer>
+                  </article>
+                </b:loop>
+              </b:if>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </div>
+
+      <!-- الشريط الجانبي -->
+      <aside class='sidebar'>
+        <b:section class='sidebar-widgets' id='sidebar' maxwidgets='10' showaddelement='yes'>
+          <!-- كتب مميزة -->
+          <b:widget id='FeaturedBooks' locked='false' title='كتب مميزة' type='HTML'>
+            <b:includable id='main'>
+              <div class='sidebar-widget books-widget'>
+                <h3 class='widget-title'>
+                  <i class='fas fa-book'></i> كتب مميزة
+                </h3>
+                <div id='featured-books-container'>
+                  <!-- سيتم ملؤها بواسطة JavaScript -->
+                </div>
+              </div>
+            </b:includable>
+          </b:widget>
+          
+          <!-- أقسام -->
+          <b:widget id='Label1' locked='false' title='الأقسام' type='Label'>
+            <b:includable id='main'>
+              <div class='sidebar-widget'>
+                <h3 class='widget-title'>
+                  <i class='fas fa-folder'></i> الأقسام
+                </h3>
+                <ul class='label-list'>
+                  <b:loop values='data:labels' var='label'>
+                    <li>
+                      <a expr:href='data:label.url'>
+                        <i class='fas fa-angle-double-left'></i>
+                        <data:label.name/> (<data:label.count/>)
+                      </a>
+                    </li>
+                  </b:loop>
+                </ul>
+              </div>
+            </b:includable>
+          </b:widget>
+          
+          <!-- أحدث التعليقات -->
+          <b:widget id='PopularPosts1' locked='false' title='مقالات شائعة' type='PopularPosts'>
+            <b:includable id='main'>
+              <div class='sidebar-widget'>
+                <h3 class='widget-title'>
+                  <i class='fas fa-fire'></i> مقالات شائعة
+                </h3>
+                <ul class='popular-posts-list'>
+                  <b:loop values='data:posts' var='post'>
+                    <li>
+                      <a expr:href='data:post.href'>
+                        <b:if cond='data:post.thumbnail'>
+                          <img expr:alt='data:post.title' expr:src='data:post.thumbnail' style='width: 60px; height: 60px; object-fit: cover; border-radius: 4px; margin-left: 10px;'/>
+                        </b:if>
+                        <span><data:post.title/></span>
+                      </a>
+                    </li>
+                  </b:loop>
+                </ul>
+              </div>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </aside>
+    </main>
+
+    <!-- القدم -->
+    <footer class='site-footer'>
+      <div class='footer-content'>
+        <div class='footer-widget'>
+          <h3><i class='fas fa-info-circle'></i> عن الموقع</h3>
+          <p>
+            جنون العظمة - موقع متخصص في نشر التراث الإسلامي والثقافة العربية الأصيلة.
+            نسعى لتقديم محتوى موثوق من مصادر معتمدة لإثراء المعرفة الإسلامية.
+          </p>
+        </div>
+        
+        <div class='footer-widget'>
+          <h3><i class='fas fa-link'></i> روابط سريعة</h3>
+          <ul class='footer-links'>
+            <li><a href='/'><i class='fas fa-home'></i> الرئيسية</a></li>
+            <li><a href='/p/library.html'><i class='fas fa-book'></i> مكتبة الكتب</a></li>
+            <li><a href='/p/prophets-stories.html'><i class='fas fa-praying-hands'></i> قصص الأنبياء</a></li>
+            <li><a href='/p/about.html'><i class='fas fa-info'></i> من نحن</a></li>
+          </ul>
+        </div>
+        
+        <div class='footer-widget'>
+          <h3><i class='fas fa-envelope'></i> تواصل معنا</h3>
+          <ul class='footer-links'>
+            <li><a href='mailto:info@example.com'><i class='fas fa-envelope'></i> info@example.com</a></li>
+            <li><a href='/p/privacy.html'><i class='fas fa-shield-alt'></i> سياسة الخصوصية</a></li>
+            <li><a href='/p/terms.html'><i class='fas fa-file-contract'></i> شروط الاستخدام</a></li>
+          </ul>
+        </div>
+        
+        <div class='footer-widget'>
+          <h3><i class='fas fa-share-alt'></i> تابعنا</h3>
+          <div class='social-links'>
+            <!-- أضف روابط وسائل التواصل الاجتماعي هنا -->
+          </div>
+        </div>
+      </div>
+      
+      <div class='footer-bottom'>
+        <p>جميع الحقوق محفوظة © 2026 - جنون العظمة | تصميم بعناية وحب للتراث الإسلامي</p>
+      </div>
+    </footer>
+
+    <!-- بحث متقدم -->
+    <div class='search-overlay' id='searchOverlay'>
+      <button class='search-close' onclick='toggleSearch()'>
+        <i class='fas fa-times'></i>
+      </button>
+      <div class='search-container'>
+        <h2 style='text-align: center; font-family: var(--font-display); color: var(--primary-color); margin-bottom: 1rem;'>
+          <i class='fas fa-search'></i> ابحث في الموقع
+        </h2>
+        <form action='/search' method='get'>
+          <input class='search-input' name='q' placeholder='ابحث عن كتاب، مقال، أو موضوع...' type='text'/>
+        </form>
+      </div>
+    </div>
+
+    <!-- دردشة الذكاء الاصطناعي -->
+    <div class='ai-chat-widget' id='aiChatWidget'>
+      <div class='chat-header'>
+        <h3><i class='fas fa-robot'></i> مساعد ذكي</h3>
+        <button class='chat-close' onclick='toggleAIChat()'>
+          <i class='fas fa-times'></i>
+        </button>
+      </div>
+      
+      <div class='chat-messages' id='chatMessages'>
+        <div class='chat-message'>
+          <div class='message-avatar'>
+            <i class='fas fa-robot'></i>
+          </div>
+          <div class='message-content'>
+            السلام عليكم! أنا مساعدك الذكي. كيف يمكنني مساعدتك اليوم؟
+          </div>
+        </div>
+      </div>
+      
+      <div class='chat-input-area'>
+        <input class='chat-input' id='chatInput' placeholder='اكتب رسالتك هنا...' type='text'/>
+        <button class='chat-send' onclick='sendChatMessage()'>
+          <i class='fas fa-paper-plane'></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- قارئ PDF -->
+    <div class='pdf-reader-modal' id='pdfReaderModal'>
+      <div class='pdf-reader-header'>
+        <h3 class='pdf-reader-title' id='pdfReaderTitle'>عنوان الكتاب</h3>
+        <button class='pdf-reader-close' onclick='closePDFReader()'>
+          <i class='fas fa-times'></i> إغلاق
+        </button>
+      </div>
+      <div class='pdf-reader-content'>
+        <iframe class='pdf-reader-iframe' id='pdfReaderIframe'></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script type='text/javascript'>
+  //<![CDATA[
+  
+  // Toggle Search Overlay
+  function toggleSearch() {
+    const overlay = document.getElementById('searchOverlay');
+    overlay.classList.toggle('active');
+    if (overlay.classList.contains('active')) {
+      document.querySelector('.search-input').focus();
+    }
+  }
+  
+  // Toggle AI Chat Widget
+  function toggleAIChat() {
+    const widget = document.getElementById('aiChatWidget');
+    widget.classList.toggle('active');
+    if (widget.classList.contains('active')) {
+      document.getElementById('chatInput').focus();
+    }
+  }
+  
+  // Send Chat Message
+  function sendChatMessage() {
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    addChatMessage(message, 'user');
+    input.value = '';
+    
+    // Simulate AI response (replace with actual API call)
+    setTimeout(() => {
+      const response = 'شكراً على رسالتك! هذه رسالة تجريبية. يجب ربط المساعد بواجهة API حقيقية.';
+      addChatMessage(response, 'bot');
+    }, 1000);
+  }
+  
+  // Add Chat Message
+  function addChatMessage(text, sender) {
+    const messagesContainer = document.getElementById('chatMessages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${sender}`;
+    
+    const avatarDiv = document.createElement('div');
+    avatarDiv.className = 'message-avatar';
+    avatarDiv.innerHTML = sender === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.textContent = text;
+    
+    messageDiv.appendChild(avatarDiv);
+    messageDiv.appendChild(contentDiv);
+    messagesContainer.appendChild(messageDiv);
+    
+    // Scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+  
+  // Handle Enter key in chat
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+      chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          sendChatMessage();
+        }
+      });
+    }
+    
+    // Load featured books
+    loadFeaturedBooks();
+  });
+  
+  // Close search on Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const searchOverlay = document.getElementById('searchOverlay');
+      const chatWidget = document.getElementById('aiChatWidget');
+      const pdfModal = document.getElementById('pdfReaderModal');
+      
+      if (searchOverlay.classList.contains('active')) {
+        toggleSearch();
+      }
+      if (chatWidget.classList.contains('active')) {
+        toggleAIChat();
+      }
+      if (pdfModal.classList.contains('active')) {
+        closePDFReader();
+      }
+    }
+  });
+  
+  // PDF Reader Functions
+  function openPDFReader(title, url) {
+    const modal = document.getElementById('pdfReaderModal');
+    const iframe = document.getElementById('pdfReaderIframe');
+    const titleElement = document.getElementById('pdfReaderTitle');
+    
+    titleElement.textContent = title;
+    iframe.src = url;
+    modal.classList.add('active');
+  }
+  
+  function closePDFReader() {
+    const modal = document.getElementById('pdfReaderModal');
+    const iframe = document.getElementById('pdfReaderIframe');
+    
+    modal.classList.remove('active');
+    iframe.src = '';
+  }
+  
+  // Load Featured Books (placeholder)
+  function loadFeaturedBooks() {
+    const container = document.getElementById('featured-books-container');
+    if (!container) return;
+    
+    // هذا مثال - سيتم استبداله بالقراءة من Google Sheet
+    const sampleBooks = [
+      {
+        title: 'صحيح البخاري',
+        author: 'الإمام البخاري',
+        icon: 'book-quran'
+      },
+      {
+        title: 'رياض الصالحين',
+        author: 'الإمام النووي',
+        icon: 'book-open'
+      },
+      {
+        title: 'زاد المعاد',
+        author: 'ابن القيم',
+        icon: 'book'
+      }
+    ];
+    
+    container.innerHTML = sampleBooks.map(book => `
+      <div class="book-item">
+        <i class="fas fa-${book.icon}" style="font-size: 2rem; color: var(--accent-gold);"></i>
+        <div class="book-info">
+          <h4>${book.title}</h4>
+          <p>${book.author}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+  
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href !== '#' && href !== '') {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+  
+  //]]>
+  </script>
+</body>
+</html>
