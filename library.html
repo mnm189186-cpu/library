@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مكتبة الكتب - جنون العظمة</title>
+  
+  <!-- يجب نسخ نفس أنماط CSS من القالب -->
+  <style>
+    /* يمكن تضمين نفس CSS من blogger-template.xml أو ربطه */
+    :root {
+      --primary-color: #8B6F47;
+      --secondary-color: #2C5F7E;
+      --accent-gold: #D4AF37;
+      --parchment-bg: #F5E6D3;
+      --text-primary: #2C2416;
+      --border-ornament: #C9A26A;
+    }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #F5E6D3 0%, #EAD8C0 50%, #F5E6D3 100%);
+      direction: rtl;
+    }
+    
+    .books-library-page {
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    
+    .library-hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    
+    .library-hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    .library-hero p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+    
+    .library-controls {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    
+    .search-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: 2px solid var(--border-ornament);
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+    }
+    
+    .search-btn {
+      padding: 1rem 2rem;
+      background: var(--accent-gold);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+    
+    .search-btn:hover {
+      background: var(--secondary-color);
+      transform: scale(1.05);
+    }
+    
+    .filter-tabs {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .filter-tab {
+      padding: 0.7rem 1.5rem;
+      background: var(--parchment-bg);
+      border: 2px solid var(--border-ornament);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Cairo', sans-serif;
+    }
+    
+    .filter-tab:hover,
+    .filter-tab.active {
+      background: var(--secondary-color);
+      color: white;
+      border-color: var(--secondary-color);
+    }
+    
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .book-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+      border: 1px solid var(--border-ornament);
+    }
+    
+    .book-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+    
+    .book-cover-container {
+      width: 100%;
+      height: 350px;
+      background: var(--parchment-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: var(--accent-gold);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .book-cover-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .book-cover-icon {
+      font-size: 5rem;
+      color: var(--accent-gold);
+    }
+    
+    .book-card-body {
+      padding: 1.5rem;
+    }
+    
+    .book-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .book-author {
+      color: var(--text-primary);
+      opacity: 0.8;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    
+    .book-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+    
+    .book-category {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: var(--accent-gold);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .book-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .book-btn {
+      flex: 1;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+    }
+    
+    .book-btn-read {
+      background: var(--secondary-color);
+      color: white;
+    }
+    
+    .book-btn-read:hover {
+      background: var(--primary-color);
+    }
+    
+    .book-btn-download {
+      background: var(--parchment-bg);
+      color: var(--primary-color);
+      border: 2px solid var(--border-ornament);
+    }
+    
+    .book-btn-download:hover {
+      background: var(--accent-gold);
+      color: white;
+    }
+    
+    .loading-container {
+      text-align: center;
+      padding: 3rem;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border: 6px solid rgba(0,0,0,0.1);
+      border-top-color: var(--accent-gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .no-results {
+      text-align: center;
+      padding: 3rem;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <div class="books-library-page">
+    <!-- Hero Section -->
+    <div class="library-hero">
+      <h1><i class="fas fa-book-open"></i> مكتبة جنون العظمة</h1>
+      <p>مجموعة ضخمة من الكتب الإسلامية والتراثية من مصادر موثوقة</p>
+      <p style="font-size: 0.95rem; margin-top: 0.5rem; opacity: 0.9;">
+        <i class="fas fa-info-circle"></i> جميع الكتب من مصادر عامة ومجانية (Internet Archive, Wikisource, Tanzil)
+      </p>
+    </div>
+    
+    <!-- Library Controls -->
+    <div class="library-controls">
+      <div class="search-container">
+        <input 
+          type="text" 
+          class="search-input" 
+          id="bookSearch" 
+          placeholder="ابحث عن كتاب بالعنوان أو المؤلف أو الموضوع..."
+          onkeyup="searchBooks()"
+        />
+        <button class="search-btn" onclick="searchBooks()">
+          <i class="fas fa-search"></i> بحث
+        </button>
+      </div>
+      
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-category="all" onclick="filterByCategory('all')">
+          <i class="fas fa-th"></i> الكل
+        </button>
+        <button class="filter-tab" data-category="قرآن" onclick="filterByCategory('قرآن')">
+          <i class="fas fa-quran"></i> القرآن الكريم
+        </button>
+        <button class="filter-tab" data-category="حديث" onclick="filterByCategory('حديث')">
+          <i class="fas fa-book"></i> الحديث
+        </button>
+        <button class="filter-tab" data-category="فقه" onclick="filterByCategory('فقه')">
+          <i class="fas fa-gavel"></i> الفقه
+        </button>
+        <button class="filter-tab" data-category="سيرة" onclick="filterByCategory('سيرة')">
+          <i class="fas fa-mosque"></i> السيرة
+        </button>
+        <button class="filter-tab" data-category="تاريخ" onclick="filterByCategory('تاريخ')">
+          <i class="fas fa-landmark"></i> التاريخ
+        </button>
+        <button class="filter-tab" data-category="أدب" onclick="filterByCategory('أدب')">
+          <i class="fas fa-pen-fancy"></i> الأدب
+        </button>
+        <button class="filter-tab" data-category="علوم" onclick="filterByCategory('علوم')">
+          <i class="fas fa-atom"></i> العلوم
+        </button>
+      </div>
+    </div>
+    
+    <!-- Books Grid -->
+    <div class="books-grid" id="booksGrid">
+      <div class="loading-container">
+        <div class="spinner"></div>
+        <p style="margin-top: 1rem; color: var(--text-primary);">جاري تحميل المكتبة...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // قاعدة بيانات الكتب (يجب ربطها بـ Google Sheet أو JSON)
+    let booksDatabase = [];
+    let filteredBooks = [];
+    let currentCategory = 'all';
+    
+    // تحميل الكتب عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', function() {
+      loadBooksFromGoogleSheet();
+    });
+    
+    // تحميل الكتب من Google Sheet
+    async function loadBooksFromGoogleSheet() {
+      try {
+        // استبدل هذا بـ URL من Google Sheets API أو Apps Script Web App
+        // const sheetURL = 'YOUR_GOOGLE_SHEET_JSON_URL';
+        // const response = await fetch(sheetURL);
+        // booksDatabase = await response.json();
+        
+        // بيانات تجريبية (يجب استبدالها)
+        booksDatabase = getSampleBooks();
+        filteredBooks = booksDatabase;
+        
+        displayBooks(filteredBooks);
+      } catch (error) {
+        console.error('خطأ في تحميل الكتب:', error);
+        document.getElementById('booksGrid').innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+            <p>عذراً، حدث خطأ في تحميل المكتبة</p>
+          </div>
+        `;
+      }
+    }
+    
+    // عرض الكتب
+    function displayBooks(books) {
+      const grid = document.getElementById('booksGrid');
+      
+      if (books.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search" style="font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem;"></i>
+            <p>لا توجد كتب تطابق البحث</p>
+          </div>
+        `;
+        return;
+      }
+      
+      grid.innerHTML = books.map(book => `
+        <div class="book-card" data-book-id="${book.id}">
+          <div class="book-cover-container">
+            ${book.coverImage 
+              ? `<img src="${book.coverImage}" alt="${book.title}" />`
+              : `<i class="fas fa-book book-cover-icon"></i>`
+            }
+          </div>
+          <div class="book-card-body">
+            <span class="book-category">${book.category}</span>
+            <h3 class="book-title">${book.title}</h3>
+            <p class="book-author"><i class="fas fa-user"></i> ${book.author}</p>
+            <div class="book-meta">
+              ${book.year ? `<span><i class="far fa-calendar"></i> ${book.year}</span>` : ''}
+              ${book.pages ? `<span><i class="fas fa-file"></i> ${book.pages} صفحة</span>` : ''}
+            </div>
+            <div class="book-actions">
+              <button class="book-btn book-btn-read" onclick="openBookReader('${book.title}', '${book.readUrl}')">
+                <i class="fas fa-book-reader"></i> قراءة
+              </button>
+              <button class="book-btn book-btn-download" onclick="window.open('${book.downloadUrl}', '_blank')">
+                <i class="fas fa-download"></i> تحميل
+              </button>
+            </div>
+            <p style="font-size: 0.75rem; color: #888; margin-top: 0.8rem;">
+              <i class="fas fa-copyright"></i> ${book.license || 'Public Domain'}
+            </p>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // بحث في الكتب
+    function searchBooks() {
+      const query = document.getElementById('bookSearch').value.toLowerCase().trim();
+      
+      filteredBooks = booksDatabase.filter(book => {
+        const matchesSearch = query === '' || 
+          book.title.toLowerCase().includes(query) ||
+          book.author.toLowerCase().includes(query) ||
+          book.category.toLowerCase().includes(query) ||
+          (book.description && book.description.toLowerCase().includes(query));
+        
+        const matchesCategory = currentCategory === 'all' || book.category === currentCategory;
+        
+        return matchesSearch && matchesCategory;
+      });
+      
+      displayBooks(filteredBooks);
+    }
+    
+    // فلترة حسب الفئة
+    function filterByCategory(category) {
+      currentCategory = category;
+      
+      // تحديث الأزرار
+      document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      searchBooks();
+    }
+    
+    // فتح قارئ الكتب
+    function openBookReader(title, url) {
+      // إنشاء نافذة منبثقة أو modal لقراءة PDF
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.95);
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+      `;
+      
+      modal.innerHTML = `
+        <div style="background: var(--primary-color); color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; font-size: 1.3rem;">${title}</h3>
+          <button onclick="this.closest('div').parentElement.remove()" style="background: white; color: var(--primary-color); border: none; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-size: 1.2rem;">
+            <i class="fas fa-times"></i> إغلاق
+          </button>
+        </div>
+        <iframe src="${url}" style="flex: 1; border: none; width: 100%;"></iframe>
+      `;
+      
+      document.body.appendChild(modal);
+    }
+    
+    // بيانات تجريبية للكتب
+    function getSampleBooks() {
+      return [
+        {
+          id: 1,
+          title: 'صحيح البخاري',
+          author: 'الإمام محمد بن إسماعيل البخاري',
+          category: 'حديث',
+          year: '256 هـ',
+          pages: 1200,
+          description: 'أصح كتاب بعد كتاب الله',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-bukhari',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 2,
+          title: 'رياض الصالحين',
+          author: 'الإمام النووي',
+          category: 'حديث',
+          year: '676 هـ',
+          pages: 580,
+          description: 'مختارات من الأحاديث النبوية الشريفة',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-riyad',
+          license: 'Public Domain',
+          source: 'Wikisource'
+        },
+        {
+          id: 3,
+          title: 'تفسير ابن كثير',
+          author: 'الإمام ابن كثير',
+          category: 'قرآن',
+          year: '774 هـ',
+          pages: 2800,
+          description: 'تفسير القرآن العظيم',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-tafsir',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 4,
+          title: 'السيرة النبوية',
+          author: 'ابن هشام',
+          category: 'سيرة',
+          year: '218 هـ',
+          pages: 950,
+          description: 'سيرة رسول الله صلى الله عليه وسلم',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-sira',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 5,
+          title: 'الفقه على المذاهب الأربعة',
+          author: 'عبد الرحمن الجزيري',
+          category: 'فقه',
+          year: '1360 هـ',
+          pages: 1500,
+          description: 'موسوعة فقهية شاملة',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-fiqh',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 6,
+          title: 'تاريخ الطبري',
+          author: 'الإمام الطبري',
+          category: 'تاريخ',
+          year: '310 هـ',
+          pages: 3200,
+          description: 'تاريخ الرسل والملوك',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-tabari',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 7,
+          title: 'البداية والنهاية',
+          author: 'ابن كثير',
+          category: 'تاريخ',
+          year: '774 هـ',
+          pages: 2500,
+          description: 'موسوعة تاريخية إسلامية',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-bidaya',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 8,
+          title: 'المقدمة',
+          author: 'ابن خلدون',
+          category: 'علوم',
+          year: '808 هـ',
+          pages: 680,
+          description: 'مقدمة في علم الاجتماع والتاريخ',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-muqaddimah',
+          license: 'Public Domain',
+          source: 'Wikisource'
+        },
+        {
+          id: 9,
+          title: 'ديوان المتنبي',
+          author: 'أبو الطيب المتنبي',
+          category: 'أدب',
+          year: '354 هـ',
+          pages: 420,
+          description: 'أشعار أعظم شعراء العربية',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-mutanabbi',
+          license: 'Public Domain',
+          source: 'Wikisource'
+        },
+        {
+          id: 10,
+          title: 'إحياء علوم الدين',
+          author: 'الإمام الغزالي',
+          category: 'فقه',
+          year: '505 هـ',
+          pages: 1800,
+          description: 'موسوعة في العلوم الدينية والأخلاق',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-ihya',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 11,
+          title: 'زاد المعاد في هدي خير العباد',
+          author: 'ابن القيم الجوزية',
+          category: 'سيرة',
+          year: '751 هـ',
+          pages: 920,
+          description: 'في فقه السيرة والهدي النبوي',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-zad',
+          license: 'Public Domain',
+          source: 'Internet Archive'
+        },
+        {
+          id: 12,
+          title: 'الرحيق المختوم',
+          author: 'صفي الرحمن المباركفوري',
+          category: 'سيرة',
+          year: '1427 هـ',
+          pages: 560,
+          description: 'السيرة النبوية الصحيحة',
+          readUrl: 'https://drive.google.com/file/d/SAMPLE_ID/preview',
+          downloadUrl: 'https://archive.org/details/sample-raheeq',
+          license: 'Creative Commons',
+          source: 'Internet Archive'
+        }
+      ];
+    }
+  </script>
+</body>
+</html>
